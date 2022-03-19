@@ -8,20 +8,33 @@ const ProductComponent = () => {
     const { score, show} = product;
     return (
       <div className="four wide column" key={show.id}>
-        <Link to={`/product/${show.id}`}>
-          <div className="ui link cards">
+       
+<div className="ui link cards d-flex align-items-center 
+justify-content-center">
             <div className="card">
               <div className="image">
                 <img src={show.image.original} alt={show.name} />
               </div>
-              <div className="content">
+              <div className="pt-4 pb-3 px-4 d-flex align-items-center
+              justify-content-between">
                 <div className="header">{show.name}</div>
-                <div className="meta price"> {show.premiered}</div>
+                
                 <div className="meta">{show.language}</div>
               </div>
+              <div  className="pt-2 pb-3 px-4 d-flex align-items-center
+              justify-content-between">
+ <div className="meta price"> {show.premiered}</div>
+              <Link to={`/product/${show.id}`}>
+              <button type="button" class="btn btn-outline-secondary">
+               Summary</button>
+             </Link>
+              </div>
+              
             </div>
-          </div>
-        </Link>
+        
+           </div>
+          
+      
       </div>
     );
   });

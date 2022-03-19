@@ -10,47 +10,55 @@ import {
 const ProductDetails = () => {
   const { productId } = useParams();
   let product = useSelector((state) => state.allProducts.product);
-  const { name ,summary, image} = product;
+  const { name, summary, image} = product;
+  
   const dispatch = useDispatch();
   const fetchProductDetail = async (id) => {
     const response = await axios
       .get(`https://api.tvmaze.com/shows/${id}`)
-      
+
       .catch((err) => {
         console.log("Err: ", err);
       });
-      console.log(response.data)
+    // console.log(response.data)
     dispatch(selectedProduct(response.data));
   };
+ 
 
   useEffect(() => {
     if (productId && productId !== "") fetchProductDetail(productId);
- 
+
   }, [productId]);
-  console.log(product)
+ 
   return (
     <div className="ui grid container">
       {Object.keys(product).length === 0 ? (
         <div>...Loading</div>
       ) : (
-        <div className="container">
-           <div className="row d-flex align-items-center justify-content-center" >
-           <div className="col-md-5 text-center">
-                 <img src={image.medium} className='img-fluid'/>
-           </div>
-           <div className="col-md-7">
-             <p>
-             {HTMLReactParser(summary)}
-             </p>
-                 <Link to="/form">
-           <button type="button" class="btn btn-outline-secondary">Book Now</button>
+        <>
+          <div className="container">
+            <div className="row d-flex align-items-center justify-content-center" >
+              <div className="col-md-5 text-center">
+                <img src={image.medium} className='img-fluid' />
+              </div>
+              <div className="col-md-7">
+                <h1 className="py-4">{name}</h1>
+                <p>
+                  {HTMLReactParser(summary)}
+                </p>
+                <Link to="/form">
+                  <button type="button" class="btn btn-outline-secondary">
+                    Book Now</button>
 
-                 </Link>
+                </Link>
+             
+              </div>
 
-           </div>
-         
-           </div>
-        </div>
+            </div>
+          </div>
+       
+
+        </>
       )}
     </div>
   );

@@ -50,7 +50,7 @@ const Bookform = () => {
         myname: values.myname};
 
         setList([...list, newItem]);
-        console.log(list);
+        // console.log(list);
         setValues({
           
             myname: "",
